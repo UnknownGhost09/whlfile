@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2023 at 06:41 AM
+-- Generation Time: Jun 09, 2023 at 09:41 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.2.4
 
@@ -323,6 +323,26 @@ CREATE TABLE `bitmex_model` (
   `status` varchar(100) NOT NULL,
   `id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `botstop`
+--
+
+CREATE TABLE `botstop` (
+  `id` bigint(20) NOT NULL,
+  `signal` varchar(20) NOT NULL,
+  `status` varchar(20) NOT NULL,
+  `initial` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `botstop`
+--
+
+INSERT INTO `botstop` (`id`, `signal`, `status`, `initial`) VALUES
+(1, '1', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -660,7 +680,11 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (54, 'user_exchanges', '0009_alter_botstop_status', '2023-03-16 06:41:57.421886'),
 (55, 'core', '0024_alter_user_log_id_alter_user_updated_at', '2023-03-21 11:48:15.875285'),
 (56, 'user_exchanges', '0010_logsmodel', '2023-03-21 11:48:16.047766'),
-(57, 'core', '0025_remove_user_log_id_alter_user_updated_at', '2023-05-08 14:11:27.742051');
+(57, 'core', '0025_remove_user_log_id_alter_user_updated_at', '2023-05-08 14:11:27.742051'),
+(58, 'core', '0026_alter_user_updated_at', '2023-06-07 05:39:50.231587'),
+(59, 'user_exchanges', '0011_remove_logsmodel_exchange_remove_logsmodel_price_and_more', '2023-06-07 05:39:50.419977'),
+(60, 'core', '0027_alter_user_updated_at', '2023-06-07 06:03:29.303678'),
+(61, 'user_exchanges', '0012_alter_botstop_table_alter_killbot_table_and_more', '2023-06-07 06:03:29.425615');
 
 -- --------------------------------------------------------
 
@@ -1122,6 +1146,24 @@ CREATE TABLE `gate_model` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `killbot`
+--
+
+CREATE TABLE `killbot` (
+  `id` bigint(20) NOT NULL,
+  `shut_down` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `killbot`
+--
+
+INSERT INTO `killbot` (`id`, `shut_down`) VALUES
+(1, '0');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `kucoin_keys1`
 --
 
@@ -1158,6 +1200,30 @@ CREATE TABLE `kucoin_model` (
   `clientOid` varchar(200) NOT NULL,
   `id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `logsmodel`
+--
+
+CREATE TABLE `logsmodel` (
+  `sr` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `order` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `logsmodel`
+--
+
+INSERT INTO `logsmodel` (`sr`, `id`, `order`) VALUES
+(1, 1, 'null'),
+(2, 1, 'null'),
+(3, 1, 'null'),
+(4, 1, 'null'),
+(5, 1, 'null'),
+(6, 1, 'null');
 
 -- --------------------------------------------------------
 
@@ -1253,72 +1319,6 @@ CREATE TABLE `user_exchanges_bitmexkeys1` (
 INSERT INTO `user_exchanges_bitmexkeys1` (`sr`, `api_key`, `secret_key`, `id`) VALUES
 (1, 'PKzGWrAmsNU7VkRjDncGUZjz', 'IA9ScGwXy-qKTj5sSRP20S2wsdr_ODeewupgUNsKWp5JvI7Q', 1);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `user_exchanges_botstop`
---
-
-CREATE TABLE `user_exchanges_botstop` (
-  `id` bigint(20) NOT NULL,
-  `signal` varchar(20) NOT NULL,
-  `status` varchar(20) NOT NULL,
-  `initial` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `user_exchanges_botstop`
---
-
-INSERT INTO `user_exchanges_botstop` (`id`, `signal`, `status`, `initial`) VALUES
-(1, '1', '1', '1');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_exchanges_killbot`
---
-
-CREATE TABLE `user_exchanges_killbot` (
-  `id` bigint(20) NOT NULL,
-  `shut_down` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `user_exchanges_killbot`
---
-
-INSERT INTO `user_exchanges_killbot` (`id`, `shut_down`) VALUES
-(1, '0');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_exchanges_logsmodel`
---
-
-CREATE TABLE `user_exchanges_logsmodel` (
-  `sr` int(11) NOT NULL,
-  `symbol` varchar(200) NOT NULL,
-  `price` varchar(200) NOT NULL,
-  `quantity` varchar(200) NOT NULL,
-  `side` varchar(200) NOT NULL,
-  `exchange` varchar(200) NOT NULL,
-  `id` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `user_exchanges_logsmodel`
---
-
-INSERT INTO `user_exchanges_logsmodel` (`sr`, `symbol`, `price`, `quantity`, `side`, `exchange`, `id`) VALUES
-(1, 'BTCUSDT', '27701.19000000', '0.42914', 'sell', 'Binance', 1),
-(2, 'BTCUSDT', '28295.54000000', '0.03534', 'buy', 'Binance', 1),
-(3, 'BTCUSDT', '30067.88000000', '0.03326', 'buy', 'Binance', 1),
-(4, 'BTCUSDT', '29961.88000000', '0.00334', 'sell', 'Binance', 1),
-(5, 'BTCUSDT', '30775.10000000', '0.00325', 'buy', 'Binance', 1),
-(6, 'BTCUSDT', '30765.54000000', '0.00325', 'buy', 'Binance', 1);
-
 --
 -- Indexes for dumped tables
 --
@@ -1384,6 +1384,12 @@ ALTER TABLE `binance_model`
 ALTER TABLE `bitmex_model`
   ADD PRIMARY KEY (`orderID`),
   ADD KEY `Bitmex_model_id_f2d6a05c_fk_core_user_id` (`id`);
+
+--
+-- Indexes for table `botstop`
+--
+ALTER TABLE `botstop`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `core_user`
@@ -1472,6 +1478,12 @@ ALTER TABLE `gate_model`
   ADD KEY `Gate_model_id_ef12f8db_fk_core_user_id` (`id`);
 
 --
+-- Indexes for table `killbot`
+--
+ALTER TABLE `killbot`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `kucoin_keys1`
 --
 ALTER TABLE `kucoin_keys1`
@@ -1486,6 +1498,13 @@ ALTER TABLE `kucoin_model`
   ADD KEY `Kucoin_model_id_984ed537_fk_core_user_id` (`id`);
 
 --
+-- Indexes for table `logsmodel`
+--
+ALTER TABLE `logsmodel`
+  ADD PRIMARY KEY (`sr`),
+  ADD KEY `user_exchanges_logsmodel_id_ff2a1986_fk_core_user_id` (`id`);
+
+--
 -- Indexes for table `pair_table`
 --
 ALTER TABLE `pair_table`
@@ -1497,25 +1516,6 @@ ALTER TABLE `pair_table`
 ALTER TABLE `user_exchanges_bitmexkeys1`
   ADD PRIMARY KEY (`sr`),
   ADD KEY `user_exchanges_bitmexkeys1_id_c60cdfb5_fk_core_user_id` (`id`);
-
---
--- Indexes for table `user_exchanges_botstop`
---
-ALTER TABLE `user_exchanges_botstop`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `user_exchanges_killbot`
---
-ALTER TABLE `user_exchanges_killbot`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `user_exchanges_logsmodel`
---
-ALTER TABLE `user_exchanges_logsmodel`
-  ADD PRIMARY KEY (`sr`),
-  ADD KEY `user_exchanges_logsmodel_id_ff2a1986_fk_core_user_id` (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1564,6 +1564,12 @@ ALTER TABLE `binanace_keys1`
   MODIFY `sr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `botstop`
+--
+ALTER TABLE `botstop`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `core_user`
 --
 ALTER TABLE `core_user`
@@ -1597,7 +1603,7 @@ ALTER TABLE `django_content_type`
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `exception`
@@ -1618,10 +1624,22 @@ ALTER TABLE `gate_keys1`
   MODIFY `sr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `killbot`
+--
+ALTER TABLE `killbot`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `kucoin_keys1`
 --
 ALTER TABLE `kucoin_keys1`
   MODIFY `sr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `logsmodel`
+--
+ALTER TABLE `logsmodel`
+  MODIFY `sr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pair_table`
@@ -1634,24 +1652,6 @@ ALTER TABLE `pair_table`
 --
 ALTER TABLE `user_exchanges_bitmexkeys1`
   MODIFY `sr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `user_exchanges_botstop`
---
-ALTER TABLE `user_exchanges_botstop`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `user_exchanges_killbot`
---
-ALTER TABLE `user_exchanges_killbot`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `user_exchanges_logsmodel`
---
-ALTER TABLE `user_exchanges_logsmodel`
-  MODIFY `sr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -1746,16 +1746,16 @@ ALTER TABLE `kucoin_model`
   ADD CONSTRAINT `Kucoin_model_id_984ed537_fk_core_user_id` FOREIGN KEY (`id`) REFERENCES `core_user` (`id`);
 
 --
+-- Constraints for table `logsmodel`
+--
+ALTER TABLE `logsmodel`
+  ADD CONSTRAINT `user_exchanges_logsmodel_id_ff2a1986_fk_core_user_id` FOREIGN KEY (`id`) REFERENCES `core_user` (`id`);
+
+--
 -- Constraints for table `user_exchanges_bitmexkeys1`
 --
 ALTER TABLE `user_exchanges_bitmexkeys1`
   ADD CONSTRAINT `user_exchanges_bitmexkeys1_id_c60cdfb5_fk_core_user_id` FOREIGN KEY (`id`) REFERENCES `core_user` (`id`);
-
---
--- Constraints for table `user_exchanges_logsmodel`
---
-ALTER TABLE `user_exchanges_logsmodel`
-  ADD CONSTRAINT `user_exchanges_logsmodel_id_ff2a1986_fk_core_user_id` FOREIGN KEY (`id`) REFERENCES `core_user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
